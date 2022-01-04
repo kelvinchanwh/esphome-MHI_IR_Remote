@@ -6,8 +6,8 @@ namespace esphome {
 namespace espmhi {
 
 // Temperature
-const uint8_t ESPMHI_TEMP_MIN = 16;  // Celsius
-const uint8_t ESPMHI_TEMP_MAX = 31;  // Celsius
+const uint8_t ESPMHI_TEMP_MIN = 18;  // Celsius
+const uint8_t ESPMHI_TEMP_MAX = 30;  // Celsius
 
 class espmhiClimate : public climate_ir::ClimateIR {
  public:
