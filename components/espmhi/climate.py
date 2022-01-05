@@ -64,5 +64,5 @@ async def to_code(config):
     await climate_ir.register_climate_ir(var, config)
     cg.add(var.set_horizontal_default(config[CONF_HORIZONTAL_DEFAULT]))
     cg.add(var.set_vertical_default(config[CONF_VERTICAL_DEFAULT]))
-    cg.add(var.set_protocol(config[CONF_CLEAN_DEFAULT]))
-    cg.add(var.set_protocol(config[CONF_FAN_DEFAULT]))
+    cg.add(var.set_clean_default(config[CONF_CLEAN_DEFAULT]))
+    cg.add(var.set_fan_default(config[CONF_FAN_DEFAULT]))
