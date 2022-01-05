@@ -32,13 +32,6 @@ VERTICAL_DIRECTIONS = {
     "stop": VerticalDirections.ESPMHI_VS_STOP,
 }
 
-CONF_CLEAN_DEFAULT = "clean_default"
-CleanValues = espmhi_ns.enum("CleanValues")
-CLEAN_VALUES = {
-    "on": CleanValues.ESPMHI_CLEAN_ON,
-    "off": CleanValues.ESPMHI_CLEAN_OFF,
-}
-
 CONF_FAN_DEFAULT = "fan_default"
 FanValues = espmhi_ns.enum("FanValues")
 FAN_VALUES = {
@@ -53,7 +46,6 @@ CONFIG_SCHEMA = climate_ir.CLIMATE_IR_SCHEMA.extend(
         cv.GenerateID(): cv.declare_id(espmhiClimate),
         cv.Required(CONF_HORIZONTAL_DEFAULT): cv.enum(HORIZONTAL_DIRECTIONS),
         cv.Required(CONF_VERTICAL_DEFAULT): cv.enum(VERTICAL_DIRECTIONS),
-        cv.Required(CONF_CLEAN_DEFAULT): cv.enum(CLEAN_VALUES),
         cv.Required(CONF_FAN_DEFAULT): cv.enum(FAN_VALUES),
     }
 )
@@ -64,5 +56,4 @@ async def to_code(config):
     await climate_ir.register_climate_ir(var, config)
     cg.add(var.set_horizontal_default(config[CONF_HORIZONTAL_DEFAULT]))
     cg.add(var.set_vertical_default(config[CONF_VERTICAL_DEFAULT]))
-    cg.add(var.set_clean_default(config[CONF_CLEAN_DEFAULT]))
     cg.add(var.set_fan_default(config[CONF_FAN_DEFAULT]))

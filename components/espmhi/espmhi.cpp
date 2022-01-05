@@ -20,7 +20,8 @@ void espmhiClimate::transmit_state() {
       operatingMode = ESPMHI_MODE_COOL;
       break;
     case climate::CLIMATE_MODE_HEAT_COOL: //Clean Mode
-      operatingMode = ESPMHI_MODE_HEAT;
+      operatingMode = ESPMHI_MODE_COOL;
+      cleanMode = ESPMHI_CLEAN_ON;
       break;
     case climate::CLIMATE_MODE_HEAT: //Dry Mode
       operatingMode = ESPMHI_MODE_DRY;
@@ -37,7 +38,6 @@ void espmhiClimate::transmit_state() {
   fanSpeed = default_fan_values_;
   swingH = default_horizontal_direction_;
   swingV = default_vertical_direction_;
-  cleanMode = default_clean_values_;
 
   ESP_LOGV(TAG, "Sending Mitsubishi target temp: %.1f state: %02X mode: %02X temp: %02X", this->target_temperature,
            powerMode, operatingMode, temperature);

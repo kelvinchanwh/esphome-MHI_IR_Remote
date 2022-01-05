@@ -71,9 +71,6 @@ class espmhiClimate : public climate_ir::ClimateIR {
   void set_vertical_default(uint8_t vertical_direction) {
     this->default_vertical_direction_ = vertical_direction;
   }
-  void set_clean_default(uint8_t clean_values) {
-    this->default_clean_values_ = clean_values;
-  }
   void set_fan_default(uint8_t fan_values) {
     this->default_fan_values_ = fan_values;
   }
@@ -83,7 +80,6 @@ class espmhiClimate : public climate_ir::ClimateIR {
   void transmit_state() override;
   uint8_t default_horizontal_direction_;
   uint8_t default_vertical_direction_;
-  uint8_t default_clean_values_;
   uint8_t default_fan_values_;
 };
 
