@@ -13,20 +13,11 @@ void espmhiClimate::transmit_state() {
   uint8_t temperature   = 25;
   uint8_t swingV        = ESPMHI_VS_STOP;
   uint8_t swingH        = ESPMHI_HS_STOP;
-  uint8_t cleanMode     = ESPMHI_CLEAN_OFF;
+  uint8_t cleanMode     = ESPMHI_CLEAN_ON;
 
   switch (this->mode) {
     case climate::CLIMATE_MODE_COOL:
       operatingMode = ESPMHI_MODE_COOL;
-      break;
-    case climate::CLIMATE_MODE_FAN_ONLY:
-      operatingMode = ESPMHI_MODE_FAN;
-      break;
-    case climate::CLIMATE_MODE_AUTO:
-      operatingMode = ESPMHI_MODE_AUTO;
-      break;
-    case climate::CLIMATE_MODE_DRY:
-      operatingMode = ESPMHI_MODE_DRY;
       break;
     case climate::CLIMATE_MODE_OFF:
     default:
@@ -34,34 +25,37 @@ void espmhiClimate::transmit_state() {
       break;
   }
 
-  uint8_t temp = (this->target_temperature);
-  if (temp > ESPMHI_TEMP_MIN && temp < ESPMHI_TEMP_MAX) {
+  if (this->target_temperature > ESPMHI_TEMP_MIN && this->target_temperature < ESPMHI_TEMP_MAX) {
     temperature = (~((temp - 17) << 4)) & 0xF0;;
   }
 
-  if (this->fan_mode == climate::CLIMATE_FAN_AUTO) {
-      fanSpeed = ESPMHI_FAN_AUTO;
-  } else if (this->fan_mode == climate::CLIMATE_FAN_LOW) {
-      fanSpeed = ESPMHI_FAN1;
-  } else if (this->fan_mode == climate::CLIMATE_FAN_MEDIUM) {
-      fanSpeed = ESPMHI_FAN2;
-  } else if (this->fan_mode == climate::CLIMATE_FAN_HIGH) { 
-      fanSpeed = ESPMHI_FAN3;
-  } else {
-      fanSpeed = ESPMHI_FAN_AUTO;
-  }
+  fanSpeed = default_fan_values_
+  // if (default_fan_values_ == climate::CLIMATE_FAN_AUTO) {
+  //     fanSpeed = ESPMHI_FAN_AUTO;
+  // } else if (default_fan_values_ == climate::CLIMATE_FAN_LOW) {
+  //     fanSpeed = ESPMHI_FAN1;
+  // } else if (default_fan_values_ == climate::CLIMATE_FAN_MEDIUM) {
+  //     fanSpeed = ESPMHI_FAN2;
+  // } else if (default_fan_values_ == climate::CLIMATE_FAN_HIGH) { 
+  //     fanSpeed = ESPMHI_FAN3;
+  // } else {
+  //     fanSpeed = ESPMHI_FAN_AUTO;
+  // }
 
-  if (this->swing_mode == climate::CLIMATE_SWING_BOTH){
-      swingV = ESPMHI_VS_SWING;
-      swingH = ESPMHI_HS_SWING;
-  } else if (this->swing_mode == climate::CLIMATE_SWING_HORIZONTAL){
-      swingH = ESPMHI_HS_SWING;
-  } else if (this->swing_mode == climate::CLIMATE_SWING_VERTICAL){
-      swingV = ESPMHI_VS_SWING;
-  } else {
-      swingV = ESPMHI_VS_STOP;
-      swingH = ESPMHI_HS_STOP;
-  }
+  swingH = default_horizontal_direction_;
+  swingV = default_vertical_direction_;
+  cleanMode = default_clean_values_;
+  // if (this->swing_mode == climate::CLIMATE_SWING_BOTH){
+  //     swingV = ESPMHI_VS_SWING;
+  //     swingH = ESPMHI_HS_SWING;
+  // } else if (this->swing_mode == climate::CLIMATE_SWING_HORIZONTAL){
+  //     swingH = ESPMHI_HS_SWING;
+  // } else if (this->swing_mode == climate::CLIMATE_SWING_VERTICAL){
+  //     swingV = ESPMHI_VS_SWING;
+  // } else {
+  //     swingV = ESPMHI_VS_STOP;
+  //     swingH = ESPMHI_HS_STOP;
+  // }
 
   ESP_LOGV(TAG, "Sending Mitsubishi target temp: %.1f state: %02X mode: %02X temp: %02X", this->target_temperature,
            powerMode, operatingMode, temperature);
