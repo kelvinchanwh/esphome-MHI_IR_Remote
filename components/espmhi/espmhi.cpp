@@ -25,9 +25,8 @@ void espmhiClimate::transmit_state() {
       break;
   }
 
-  if (this->target_temperature > ESPMHI_TEMP_MIN && this->target_temperature < ESPMHI_TEMP_MAX) {
-    temperature = (~((this->target_temperature - 17) << 4)) & 0xF0;;
-  }
+  uint8_t temperature_cmd = (uint8_t) clamp(this->target_temperature, ESPMHI_TEMP_MIN, ESPMHI_TEMP_MAX);
+  temperature = (~((temperature_cmd - 17) << 4)) & 0xF0;;
 
   fanSpeed = default_fan_values_;
   // if (default_fan_values_ == climate::CLIMATE_FAN_AUTO) {
