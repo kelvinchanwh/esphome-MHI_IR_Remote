@@ -21,7 +21,6 @@ void espmhiClimate::transmit_state() {
       cleanMode = ESPMHI_CLEAN_OFF;
       break;
     case climate::CLIMATE_MODE_HEAT_COOL: //Clean Mode
-      operatingMode = ESPMHI_MODE_COOL;
       cleanMode = ESPMHI_CLEAN_ON;
       break;
     case climate::CLIMATE_MODE_HEAT: //Dry Mode
