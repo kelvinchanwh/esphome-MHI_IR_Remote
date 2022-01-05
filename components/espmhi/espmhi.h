@@ -14,13 +14,13 @@ const uint16_t ESPMHI_ONE_SPACE        =1200; // 1200
 const uint16_t ESPMHI_ZERO_SPACE       =400 ; // 400
 const uint16_t ESPMHI_MIN_GAP       =17500 ; // 17500
 
-
 // Mitsubishi Heavy codes
+//Clean: 0x06/ Off: 0x08
 // Auto:101/Heat:110/Cool:011
 // const uint8_t ESPMHI_MODE_AUTO         =0x05;// 0x07?
-// const uint8_t ESPMHI_MODE_HEAT         =0x03;
-const uint8_t ESPMHI_MODE_COOL         =0x06;
-// const uint8_t ESPMHI_MODE_DRY          =0x07;// 0x05?
+const uint8_t ESPMHI_MODE_HEAT         =0x06;
+const uint8_t ESPMHI_MODE_COOL         =0x18;
+const uint8_t ESPMHI_MODE_DRY          =0x10;
 // const uint8_t ESPMHI_MODE_FAN          =0x04;
 
 const uint32_t ESPMHI_MODE_OFF          =0x08; // Power OFF
