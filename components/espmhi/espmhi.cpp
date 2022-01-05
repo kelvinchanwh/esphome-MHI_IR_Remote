@@ -34,44 +34,35 @@ void espmhiClimate::transmit_state() {
       break;
   }
 
-  temp = (this->target_temperature);
+  uint8_t temp = (this->target_temperature);
   if (temp > ESPMHI_TEMP_MIN && temp < ESPMHI_TEMP_MAX) {
     temperature = (~((temp - 17) << 4)) & 0xF0;;
   }
 
-  fan = (this->fan_mode);
+  uint8_t fan = (this->fan_mode);
   if (fan = climate::CLIMATE_FAN_AUTO) {
       fanSpeed = ESPMHI_FAN_AUTO;
-      break;
   } else if (fan = climate::CLIMATE_FAN_LOW) {
       fanSpeed = ESPMHI_FAN1;
-      break;
   } else if (fan = climate::CLIMATE_FAN_MEDIUM) {
       fanSpeed = ESPMHI_FAN2;
-      break;
   } else if (fan = climate::CLIMATE_FAN_HIGH) { 
       fanSpeed = ESPMHI_FAN3;
-      break;
   } else {
       fanSpeed = ESPMHI_FAN_AUTO;
-      break;
   }
 
-  swing = this->swing_mode;
+  uint8_t swing = this->swing_mode;
   if (swing = climate::CLIMATE_SWING_BOTH){
       swingV = ESPMHI_VS_SWING;
       swingH = ESPMHI_HS_SWING;
-      break;
   } else if (swing = climate::CLIMATE_SWING_HORIZONTAL){
       swingH = ESPMHI_HS_SWING;
-      break;
   } else if (swing = climate::CLIMATE_SWING_VERTICAL){
       swingV = ESPMHI_VS_SWING;
-      break;
   } else {
       swingV = ESPMHI_VS_STOP;
       swingH = ESPMHI_HS_STOP;
-      break;
   }
 
   ESP_LOGV(TAG, "Sending Mitsubishi target temp: %.1f state: %02X mode: %02X temp: %02X", this->target_temperature,
