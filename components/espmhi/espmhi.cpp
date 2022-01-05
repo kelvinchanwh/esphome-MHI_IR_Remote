@@ -13,11 +13,12 @@ void espmhiClimate::transmit_state() {
   uint8_t temperature   = 25;
   uint8_t swingV        = ESPMHI_VS_STOP;
   uint8_t swingH        = ESPMHI_HS_STOP;
-  uint8_t cleanMode     = ESPMHI_CLEAN_ON;
+  uint8_t cleanMode     = ESPMHI_CLEAN_OFF;
 
   switch (this->mode) {
     case climate::CLIMATE_MODE_COOL: //Cool
       operatingMode = ESPMHI_MODE_COOL;
+      cleanMode = ESPMHI_CLEAN_OFF;
       break;
     case climate::CLIMATE_MODE_HEAT_COOL: //Clean Mode
       operatingMode = ESPMHI_MODE_COOL;
@@ -25,10 +26,12 @@ void espmhiClimate::transmit_state() {
       break;
     case climate::CLIMATE_MODE_HEAT: //Dry Mode
       operatingMode = ESPMHI_MODE_DRY;
+      cleanMode = ESPMHI_CLEAN_OFF;
       break;
     case climate::CLIMATE_MODE_OFF: //Off
     default:
       operatingMode = ESPMHI_MODE_OFF;
+      cleanMode = ESPMHI_CLEAN_OFF;
       break;
   }
 
