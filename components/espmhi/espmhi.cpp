@@ -39,26 +39,24 @@ void espmhiClimate::transmit_state() {
     temperature = (~((temp - 17) << 4)) & 0xF0;;
   }
 
-  uint8_t fan = (this->fan_mode);
-  if (fan = climate::CLIMATE_FAN_AUTO) {
+  if (this->fan_mode == climate::CLIMATE_FAN_AUTO) {
       fanSpeed = ESPMHI_FAN_AUTO;
-  } else if (fan = climate::CLIMATE_FAN_LOW) {
+  } else if (this->fan_mode == climate::CLIMATE_FAN_LOW) {
       fanSpeed = ESPMHI_FAN1;
-  } else if (fan = climate::CLIMATE_FAN_MEDIUM) {
+  } else if (this->fan_mode == climate::CLIMATE_FAN_MEDIUM) {
       fanSpeed = ESPMHI_FAN2;
-  } else if (fan = climate::CLIMATE_FAN_HIGH) { 
+  } else if (this->fan_mode == climate::CLIMATE_FAN_HIGH) { 
       fanSpeed = ESPMHI_FAN3;
   } else {
       fanSpeed = ESPMHI_FAN_AUTO;
   }
 
-  uint8_t swing = this->swing_mode;
-  if (swing = climate::CLIMATE_SWING_BOTH){
+  if (this->swing_mode == climate::CLIMATE_SWING_BOTH){
       swingV = ESPMHI_VS_SWING;
       swingH = ESPMHI_HS_SWING;
-  } else if (swing = climate::CLIMATE_SWING_HORIZONTAL){
+  } else if (this->swing_mode == climate::CLIMATE_SWING_HORIZONTAL){
       swingH = ESPMHI_HS_SWING;
-  } else if (swing = climate::CLIMATE_SWING_VERTICAL){
+  } else if (this->swing_mode == climate::CLIMATE_SWING_VERTICAL){
       swingV = ESPMHI_VS_SWING;
   } else {
       swingV = ESPMHI_VS_STOP;
