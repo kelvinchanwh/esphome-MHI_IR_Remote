@@ -11,7 +11,7 @@ espmhiClimate = espmhi_ns.class_("espmhiClimate", climate_ir.ClimateIR)
 CONF_HORIZONTAL_DEFAULT = "horizontal_default"
 HorizontalDirections = espmhi_ns.enum("HorizontalDirections")
 HORIZONTAL_DIRECTIONS = {
-    "auto": HorizontalDirections.ESPMHI_HS_SWING,
+    "swing": HorizontalDirections.ESPMHI_HS_SWING,
     "middle": HorizontalDirections.ESPMHI_HS_MIDDLE,
     "left": HorizontalDirections.ESPMHI_HS_LEFT,
     "mleft": HorizontalDirections.ESPMHI_HS_MLEFT,
@@ -23,7 +23,7 @@ HORIZONTAL_DIRECTIONS = {
 CONF_VERTICAL_DEFAULT = "vertical_default"
 VerticalDirections = espmhi_ns.enum("VerticalDirections")
 VERTICAL_DIRECTIONS = {
-    "auto": VerticalDirections.ESPMHI_VS_SWING,
+    "swing": VerticalDirections.ESPMHI_VS_SWING,
     "up": VerticalDirections.ESPMHI_VS_UP,
     "mup": VerticalDirections.ESPMHI_VS_MUP,
     "middle": VerticalDirections.ESPMHI_VS_MIDDLE,
@@ -35,17 +35,17 @@ VERTICAL_DIRECTIONS = {
 CONF_CLEAN_DEFAULT = "clean_default"
 CleanValues = espmhi_ns.enum("CleanValues")
 CLEAN_VALUES = {
-    "on": CleanValues.CLEAN_VALUES_ON,
-    "off": CleanValues.CLEAN_VALUES_OFF,
+    "on": CleanValues.ESPMHI_CLEAN_ON,
+    "off": CleanValues.ESPMHI_CLEAN_OFF,
 }
 
 CONF_FAN_DEFAULT = "fan_default"
 FanValues = espmhi_ns.enum("FanValues")
 FAN_VALUES = {
-    "auto": FanValues.CLIMATE_FAN_AUTO,
-    "low": FanValues.CLIMATE_FAN_LOW,
-    "medium": FanValues.CLIMATE_FAN_MEDIUM,
-    "high": FanValues.CLIMATE_FAN_HIGH,
+    "auto": FanValues.ESPMHI_FAN_AUTO,
+    "low": FanValues.ESPMHI_FAN1,
+    "medium": FanValues.ESPMHI_FAN2,
+    "high": FanValues.ESPMHI_FAN3,
 }
 
 CONFIG_SCHEMA = climate_ir.CLIMATE_IR_SCHEMA.extend(
