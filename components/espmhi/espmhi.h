@@ -18,9 +18,9 @@ const uint16_t ESPMHI_MIN_GAP       =17500 ; // 17500
 //Clean: 0x06/ Off: 0x08
 // Auto:101/Heat:110/Cool:011
 // const uint8_t ESPMHI_MODE_AUTO         =0x05;// 0x07?
-const uint8_t ESPMHI_MODE_HEAT         =0x06;
-const uint8_t ESPMHI_MODE_COOL         =0x18;
-const uint8_t ESPMHI_MODE_DRY          =0x10;
+// const uint8_t ESPMHI_MODE_HEAT         =0x06;
+const uint8_t ESPMHI_MODE_COOL         =0x06;
+const uint8_t ESPMHI_MODE_DRY          =0x02;
 // const uint8_t ESPMHI_MODE_FAN          =0x04;
 
 const uint32_t ESPMHI_MODE_OFF          =0x08; // Power OFF
