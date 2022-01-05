@@ -25,7 +25,7 @@ void espmhiClimate::transmit_state() {
       break;
   }
 
-  uint8_t temperature_cmd = (uint8_t) clamp(this->target_temperature, ESPMHI_TEMP_MIN, ESPMHI_TEMP_MAX);
+  uint8_t temperature_cmd = (uint8_t) clamp((uint8_t)(this->target_temperature), ESPMHI_TEMP_MIN, ESPMHI_TEMP_MAX);
   temperature = (~((temperature_cmd - 17) << 4)) & 0xF0;;
 
   fanSpeed = default_fan_values_;
