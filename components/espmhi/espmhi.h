@@ -24,7 +24,7 @@ const uint8_t ESPMHI_MODE_COOL         =0x06;
 // const uint8_t ESPMHI_MODE_FAN          =0x04;
 
 const uint32_t ESPMHI_MODE_OFF          =0x08; // Power OFF
-// const uint32_t ESPMHI_MODE_ON           =0x00; // Power ON
+const uint32_t ESPMHI_MODE_ON           =0x00; // Power ON
 
 const uint8_t ESPMHI_FAN_AUTO       =0xE0; // Fan speed
 const uint8_t ESPMHI_FAN1           =0xA0;
@@ -65,26 +65,26 @@ const uint8_t ESPMHI_TEMP_MAX = 30;  // Celsius
 class espmhiClimate : public climate_ir::ClimateIR {
  public:
   espmhiClimate() : climate_ir::ClimateIR(ESPMHI_TEMP_MIN, ESPMHI_TEMP_MAX) {}
-  void set_horizontal_default(HorizontalDirection horizontal_direction) {
+  void set_horizontal_default(uint8_t horizontal_direction) {
     this->default_horizontal_direction_ = horizontal_direction;
   }
-  void set_vertical_default(VerticalDirection vertical_direction) {
+  void set_vertical_default(uint8_t vertical_direction) {
     this->default_vertical_direction_ = vertical_direction;
   }
-  void set_clean_default(CleanValues clean_values) {
+  void set_clean_default(uint8_t clean_values) {
     this->default_clean_values_ = clean_values;
   }
-  void set_fan_default(FanValues fan_values) {
+  void set_fan_default(uint8_t fan_values) {
     this->default_fan_values_ = fan_values;
   }
 
  protected:
   /// Transmit via IR the state of this climate controller.
   void transmit_state() override;
-  HorizontalDirection default_horizontal_direction_;
-  VerticalDirection default_vertical_direction_;
-  CleanValues default_clean_values_;
-  FanValues default_fan_values_;
+  uint8_t default_horizontal_direction_;
+  uint8_t default_vertical_direction_;
+  uint8_t default_clean_values_;
+  uint8_t default_fan_values_;
 };
 
 }  // namespace espmhi

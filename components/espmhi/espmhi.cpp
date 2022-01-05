@@ -26,10 +26,10 @@ void espmhiClimate::transmit_state() {
   }
 
   if (this->target_temperature > ESPMHI_TEMP_MIN && this->target_temperature < ESPMHI_TEMP_MAX) {
-    temperature = (~((temp - 17) << 4)) & 0xF0;;
+    temperature = (~((this->target_temperature - 17) << 4)) & 0xF0;;
   }
 
-  fanSpeed = default_fan_values_
+  fanSpeed = default_fan_values_;
   // if (default_fan_values_ == climate::CLIMATE_FAN_AUTO) {
   //     fanSpeed = ESPMHI_FAN_AUTO;
   // } else if (default_fan_values_ == climate::CLIMATE_FAN_LOW) {
