@@ -7,11 +7,12 @@ namespace espmhi {
 
 
 // Mitsubishi Heavy timing constants
-const uint16_t ESPMHI_HDR_MARK         =3200; // 3200
-const uint16_t ESPMHI_HDR_SPACE        =1600; // 1600
+const uint16_t ESPMHI_HEADER_MARK         =3200; // 3200
+const uint16_t ESPMHI_HEADER_SPACE        =1600; // 1600
 const uint16_t ESPMHI_BIT_MARK         =400 ; // 400
 const uint16_t ESPMHI_ONE_SPACE        =1200; // 1200
 const uint16_t ESPMHI_ZERO_SPACE       =400 ; // 400
+const uint16_t ESPMHI_MIN_GAP       =17500 ; // 17500
 
 
 // Mitsubishi Heavy codes
@@ -32,8 +33,8 @@ const uint8_t ESPMHI_FAN3           =0x60;
 // const uint8_t ESPMHI_HIPOWER        =0x40; 
 // const uint8_t ESPMHI_ECONO          =0x00;
 
-// const uint8_t ESPMHI_CLEAN_ON       =0x00;
-// const uint8_t ESPMHI_CLEAN_OFF      =0x20;
+const uint8_t ESPMHI_CLEAN_ON       =0x00;
+const uint8_t ESPMHI_CLEAN_OFF      =0x20;
 
 // const uint8_t ESPMHI_SILENT_ON      =0x00;
 

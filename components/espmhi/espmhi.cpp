@@ -8,9 +8,9 @@ static const char *const TAG = "espmhi.climate";
 
 void espmhiClimate::transmit_state() {
   uint8_t powerMode     = ESPMHI_MODE_ON;
-  uint8_t operatingMode = ESPMHI_MODE_HEAT;
+  uint8_t operatingMode = ESPMHI_MODE_COOL;
   uint8_t fanSpeed      = ESPMHI_FAN_AUTO;
-  uint8_t temperature   = 23;
+  uint8_t temperature   = 25;
   uint8_t swingV        = ESPMHI_VS_STOP;
   uint8_t swingH        = ESPMHI_HS_STOP;
   uint8_t cleanMode     = ESPMHI_CLEAN_OFF;
@@ -34,43 +34,41 @@ void espmhiClimate::transmit_state() {
       break;
   }
 
-  if this->target_temperature > ESPMHI_TEMP_MIN and this->target_temperature < ESPMHI_TEMP_MAX {
-    temperature = (~((this->target_temperature - 17) << 4)) & 0xF0;;
+  temp = (this->target_temperature);
+  if (temp > ESPMHI_TEMP_MIN && temp < ESPMHI_TEMP_MAX) {
+    temperature = (~((temp - 17) << 4)) & 0xF0;;
   }
 
-  cleanMode = (uint8_t) this->away ? ESPMHI_CLEAN_ON : ESPMHI_CLEAN_OFF;
-
-  switch (this->fan_mode) {
-    case climate::CLIMATE_FAN_AUTO:
+  fan = (this->fan_mode);
+  if (fan = climate::CLIMATE_FAN_AUTO) {
       fanSpeed = ESPMHI_FAN_AUTO;
       break;
-    case climate::CLIMATE_FAN_LOW:
+  } else if (fan = climate::CLIMATE_FAN_LOW) {
       fanSpeed = ESPMHI_FAN1;
       break;
-    case climate::CLIMATE_FAN_MEDIUM:
+  } else if (fan = climate::CLIMATE_FAN_MEDIUM) {
       fanSpeed = ESPMHI_FAN2;
       break;
-    case climate::CLIMATE_FAN_HIGH:
+  } else if (fan = climate::CLIMATE_FAN_HIGH) { 
       fanSpeed = ESPMHI_FAN3;
       break;
-    default:
+  } else {
       fanSpeed = ESPMHI_FAN_AUTO;
       break;
   }
 
-  switch (this->swing_mode) {
-    case climate::CLIMATE_SWING_MODE_BOTH:
+  swing = this->swing_mode;
+  if (swing = climate::CLIMATE_SWING_BOTH){
       swingV = ESPMHI_VS_SWING;
       swingH = ESPMHI_HS_SWING;
       break;
-    case climate::CLIMATE_SWING_MODE_HORIZONTAL:
+  } else if (swing = climate::CLIMATE_SWING_HORIZONTAL){
       swingH = ESPMHI_HS_SWING;
       break;
-    case climate::CLIMATE_SWING__MODE_VERTICAL:
+  } else if (swing = climate::CLIMATE_SWING_VERTICAL){
       swingV = ESPMHI_VS_SWING;
       break;
-    case climate::CLIMATE_SWING_MODE_OFF:
-    default:
+  } else {
       swingV = ESPMHI_VS_STOP;
       swingH = ESPMHI_HS_STOP;
       break;
@@ -95,11 +93,6 @@ void espmhiClimate::transmit_state() {
   espmhiTemplate[6] = ~espmhiTemplate[5];
   espmhiTemplate[8] = ~espmhiTemplate[7];
   espmhiTemplate[10] = ~espmhiTemplate[9];
-
-  // Checksum
-  for (int i = 0; i < 17; i++) {
-    remote_state[17] += remote_state[i];
-  }
 
   auto transmit = this->transmitter_->transmit();
   auto data = transmit.get_data();
