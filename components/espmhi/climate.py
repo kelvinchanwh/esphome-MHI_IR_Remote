@@ -1,7 +1,6 @@
 import esphome.codegen as cg
 import esphome.config_validation as cv
 from esphome.components import climate_ir
-from esphome.const import CONF_ID
 
 AUTO_LOAD = ["climate_ir"]
 
@@ -41,7 +40,7 @@ FAN_VALUES = {
     "high": FanValues.ESPMHI_FAN3,
 }
 
-CONFIG_SCHEMA = climate_ir.CLIMATE_IR_SCHEMA.extend(
+CONFIG_SCHEMA = climate_ir.climate_ir_schema(espmhiClimate).extend(
     {
         cv.GenerateID(): cv.declare_id(espmhiClimate),
         cv.Required(CONF_HORIZONTAL_DEFAULT): cv.enum(HORIZONTAL_DIRECTIONS),
@@ -52,8 +51,7 @@ CONFIG_SCHEMA = climate_ir.CLIMATE_IR_SCHEMA.extend(
 
 
 async def to_code(config):
-    var = cg.new_Pvariable(config[CONF_ID])
-    await climate_ir.register_climate_ir(var, config)
+    var = await climate_ir.new_climate_ir(config)
     cg.add(var.set_horizontal_default(config[CONF_HORIZONTAL_DEFAULT]))
     cg.add(var.set_vertical_default(config[CONF_VERTICAL_DEFAULT]))
     cg.add(var.set_fan_default(config[CONF_FAN_DEFAULT]))
