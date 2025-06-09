@@ -40,7 +40,7 @@ FAN_VALUES = {
     "high": FanValues.ESPMHI_FAN3,
 }
 
-CONFIG_SCHEMA = climate_ir.CLIMATE_IR_WITH_RECEIVER_SCHEMA.extend(
+CONFIG_SCHEMA = climate_ir.climate_ir_schema(espmhiClimate).extend(
     {
         cv.GenerateID(): cv.declare_id(espmhiClimate),
         cv.Required(CONF_HORIZONTAL_DEFAULT): cv.enum(HORIZONTAL_DIRECTIONS),
